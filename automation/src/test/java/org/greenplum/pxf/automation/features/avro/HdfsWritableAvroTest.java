@@ -56,7 +56,8 @@ public class HdfsWritableAvroTest extends BaseFeature {
             "type_numeric_array NUMERIC(8,1)[]",
             "type_string_array TEXT[]",
             "type_date DATE",
-            "type_time TIME"
+            "type_time TIME",
+            "type_timestamp TIMESTAMP"
     };
     private static final String[] AVRO_COMPLEX_TABLE_COLS_READABLE = new String[]{
             "type_int int",
@@ -66,7 +67,8 @@ public class HdfsWritableAvroTest extends BaseFeature {
             "type_numeric_array TEXT",
             "type_string_array TEXT",
             "type_date TEXT",
-            "type_time TEXT"
+            "type_time TEXT",
+            "type_timestamp TEXT"
     };
     private String gpdbTable;
     private String hdfsPath;
@@ -344,7 +346,8 @@ public class HdfsWritableAvroTest extends BaseFeature {
                 "('{' || (i*1.0001)::varchar(255) || ',' || ((i*10.00001)*10)::varchar(255) || ',' || ((i*100.000001)*100)::varchar(255) || '}')::NUMERIC(8,1)[], " +
                 "('{\"item ' || ((i-1)*10)::varchar(255) || '\",\"item ' || (i*10)::varchar(255) || '\",\"item ' || ((i+1)*10)::varchar(255) || '\"}')::TEXT[], " +
                 "date '2001-09-28' + i, " +
-                "time '00:00:00' + (i::varchar(255) || ' seconds')::interval " +
+                "time '00:00:00' + (i::varchar(255) || ' seconds')::interval, " +
+                "timestamp '2001-09-28 01:00' + (i::varchar(255) || ' days')::interval + (i::varchar(255) || ' hours')::interval " +
                 "from generate_series(1, 100) s(i);");
     }
 
@@ -357,7 +360,8 @@ public class HdfsWritableAvroTest extends BaseFeature {
                 "('{' || (i*1.0001)::varchar(255) || ',' || ((i*10.00001)*10)::varchar(255) || ',' || ((i*100.000001)*100)::varchar(255) || '}')::NUMERIC(8,1)[], " +
                 "('{\"item ' || ((i-1)*10)::varchar(255) || '\",\"item ' || (i*10)::varchar(255) || '\",\"item ' || ((i+1)*10)::varchar(255) || '\"}')::TEXT[], " +
                 "date '2001-09-28' + i, " +
-                "time '00:00:00' + (i::varchar(255) || ' seconds')::interval " +
+                "time '00:00:00' + (i::varchar(255) || ' seconds')::interval, " +
+                "timestamp '2001-09-28 01:00' + (i::varchar(255) || ' days')::interval + (i::varchar(255) || ' hours')::interval " +
                 "from generate_series(1, 100) s(i);");
     }
 
